@@ -43,6 +43,16 @@ void PreOrder(BTree root)
 	}
 }
 
+void InOrder(BTree root)
+{
+	if(root != NULL)
+	{
+		InOrder(root->left);
+		visit(root);
+		InOrder(root->right);
+	}
+}
+
 void PreOrderWithStack(BTree root)
 {
 	stack<BTNode*> st;
@@ -70,5 +80,6 @@ int main()
 	BTree tree = NULL;
 	tree = CreateBinaryTree();	//测试用例：AB#C##DE##FG#H##I##
 	if(tree == NULL)	cout << "NULL"<<endl;
-	PreOrderWithStack(tree);
+	//PreOrderWithStack(tree);
+	InOrder(tree);
 }
