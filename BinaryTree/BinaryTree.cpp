@@ -1,5 +1,6 @@
 #include<iostream>
 #include<cstdlib>
+#include<stack>
 #include<cstring>
 
 using namespace std;
@@ -42,10 +43,32 @@ void PreOrder(BTree root)
 	}
 }
 
+void PreOrderWithStack(BTree root)
+{
+	stack<BTNode*> st;
+	BTNode *p = root;
+	while(p || !st.empty())
+	{
+		if(p)
+		{
+			visit(p);
+			st.push(p);
+			p = p->left;
+		}
+		else
+		{
+			p = st.top();
+			st.pop();
+			p = p->right;
+		}
+		
+	}
+}
+
 int main()
 {
 	BTree tree = NULL;
-	tree = CreateBinaryTree();
+	tree = CreateBinaryTree();	//测试用例：AB#C##DE##FG#H##I##
 	if(tree == NULL)	cout << "NULL"<<endl;
-	PreOrder(tree);
+	PreOrderWithStack(tree);
 }
